@@ -1,0 +1,60 @@
+{
+  "name": "typescript-graphql-mongoose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development nodemon --exec ts-node --files src/server.ts",
+    "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/mongoose-unique-validator": "^1.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.0.0",
+    "graphql": "^14.4.2",
+    "graphql-import": "^0.7.1",
+    "graphql-tools": "^4.0.5",
+    "graphql-yoga": "^1.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.6.8",
+    "mongoose-unique-validator": "^2.0.3",
+    "nodemon": "^1.19.1",
+    "reflect-metadata": "^0.1.13",
+    "typegoose": "^5.9.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^6.1.1",
+    "@types/jest": "^24.0.16",
+    "@types/mongoose": "^5.5.11",
+    "@types/node": "^12.6.9",
+    "gql2ts": "^1.10.1",
+    "graphql-request": "^1.8.2",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "ts-node": "8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3"
+  },
+  "jest": {
+    "globalSetup": "./src/testUtils/callSetup.js",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
