@@ -23,6 +23,8 @@ export class Config {
 		switch (env) {
 			case 'development':
 				return this.development;
+			case 'test':
+				return this.development;
 		}
 	}
 }

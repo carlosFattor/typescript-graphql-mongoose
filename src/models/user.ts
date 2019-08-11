@@ -8,14 +8,23 @@ export interface IUser extends Document {
 	password: string;
 	firstName: string;
 	lastName: string;
+	confirmed: boolean;
 	validPassword(password: string): boolean;
 }
 
 const UserSchema: Schema = new Schema<IUser>({
-	email: { type: String, required: true, unique: true },
-	password: { type: String, required: true },
+	email: {
+		type: String,
+		trim: true,
+		required: true,
+		unique: [ true, 'Email address is required' ],
+		lowercase: true,
+		match: [ /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address' ]
+	},
+	password: { type: String, required: true, min: 3, max: 15 },
 	firstName: { type: String, required: true },
-	lastName: { type: String || null }
+	lastName: { type: String || null },
+	confirmed: { type: Boolean, default: false }
 });
 
 UserSchema.plugin(validator, {
