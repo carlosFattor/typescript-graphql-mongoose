@@ -24,7 +24,9 @@ export const resolvers: ResolverMap = {
 				const user: IUser = new User({ email, password, firstName, lastName });
 				const userSaved = await user.save();
 				const link = await createConfirmEmail(url, userSaved._id, redis);
-				await sendEmail(email, link);
+				if (process.env.NODE_ENV !== 'test') {
+					await sendEmail(email, link);
+				}
 				return [
 					{
 						path: 'register',

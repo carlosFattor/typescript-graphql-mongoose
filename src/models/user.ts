@@ -9,7 +9,7 @@ export interface IUser extends Document {
 	firstName: string;
 	lastName: string;
 	confirmed: boolean;
-	validPassword(password: string): boolean;
+	comparePassword(password: string): Promise<boolean>;
 }
 
 const UserSchema: Schema = new Schema<IUser>({
@@ -53,11 +53,8 @@ UserSchema.pre<IUser>('save', function(next) {
 	});
 });
 
-declare type handleCallback = (myArgument: boolean) => void;
-UserSchema.methods.comparePassword = function(candidatePassword: string, callback: handleCallback) {
-	bcrypt.compare(candidatePassword, this.password).then((resp: boolean) => {
-		callback(resp);
-	});
+UserSchema.methods.comparePassword = function(candidatePassword: string): Promise<boolean> {
+	return bcrypt.compare(candidatePassword, this.password);
 };
 
 UserSchema.methods.generateJWT = function(secret: string, expiresIn: number): string {
